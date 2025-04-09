@@ -1,0 +1,92 @@
+# EditorConfig style reference
+# https://docs.microsoft.com/ja-jp/visualstudio/ide/editorconfig-code-style-settings-reference
+
+
+
+# top-most EditorConfig file
+root = true
+
+# Don't use tabs for indentation.
+[*]
+indent_style = space
+trim_trailing_whitespace = true
+
+# Code files
+[*.{cs,csx,vb,vbx,ts,js,css,less}]
+indent_size = 4
+insert_final_newline = true
+charset = utf-8-bom
+
+# Razor files
+[*.{cshtml,razor}]
+indent_size = 4
+charset = utf-8-bom
+
+# Xml project files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size = 4
+
+# Xml config files
+[*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
+indent_size = 4
+
+# JSON files
+[*.json]
+indent_size = 4
+
+# CSharp
+[*.cs]
+dotnet_code_quality_unused_parameters = all:silent
+dotnet_code_quality.ca1822.api_surface = private
+
+dotnet_diagnostic.CA1304.severity = error
+dotnet_diagnostic.CA1305.severity = error
+dotnet_diagnostic.CA1307.severity = error
+dotnet_diagnostic.CA1310.severity = error
+dotnet_diagnostic.CA1848.severity = error
+dotnet_diagnostic.CA2016.severity = error
+dotnet_diagnostic.CA2254.severity = error
+dotnet_diagnostic.CS9124.severity = error
+dotnet_diagnostic.IDE0004.severity = error
+dotnet_diagnostic.IDE0005.severity = warning
+dotnet_diagnostic.IDE0009.severity = error
+dotnet_diagnostic.IDE0017.severity = error
+dotnet_diagnostic.IDE0028.severity = error
+dotnet_diagnostic.IDE0034.severity = error
+dotnet_diagnostic.IDE0041.severity = error
+dotnet_diagnostic.IDE0044.severity = error
+dotnet_diagnostic.IDE0052.severity = warning
+dotnet_diagnostic.IDE0079.severity = error
+dotnet_diagnostic.IDE0080.severity = error
+dotnet_diagnostic.IDE0082.severity = error
+dotnet_diagnostic.IDE0090.severity = error
+dotnet_diagnostic.IDE0100.severity = error
+dotnet_diagnostic.IDE0120.severity = error
+dotnet_diagnostic.IDE0161.severity = error
+dotnet_diagnostic.IDE0170.severity = silent
+dotnet_diagnostic.IDE0230.severity = error
+dotnet_diagnostic.IDE0240.severity = error
+dotnet_diagnostic.IDE0241.severity = error
+dotnet_diagnostic.IDE0250.severity = error
+dotnet_diagnostic.IDE0251.severity = error
+dotnet_diagnostic.IDE0270.severity = silent
+dotnet_diagnostic.IDE0290.severity = error
+dotnet_diagnostic.IDE0300.severity = error
+dotnet_diagnostic.IDE0301.severity = error
+dotnet_diagnostic.IDE0302.severity = error
+dotnet_diagnostic.IDE0303.severity = error
+dotnet_diagnostic.IDE0304.severity = error
+dotnet_diagnostic.IDE0305.severity = silent
+dotnet_diagnostic.IDE0320.severity = error
+dotnet_diagnostic.IDE0330.severity = error
+
+dotnet_sort_system_directives_first = true
+dotnet_style_qualification_for_field = true
+dotnet_style_qualification_for_property = true
+dotnet_style_qualification_for_method = true
+dotnet_style_qualification_for_event = true
+
+csharp_prefer_simple_using_statement = false:none
+csharp_style_deconstructed_variable_declaration = false:none
+csharp_style_pattern_matching_over_as_with_null_check = false:none
+csharp_style_namespace_declarations = file_scoped:suggestion
