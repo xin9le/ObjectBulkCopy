@@ -1,5 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+    <Import Project="../NuGet.props" />
+
+    <PropertyGroup>
+        <PackageId>ObjectBulkCopy</PackageId>
+        <Description>A super easy way to bulk copy your CLR objects to SQL Server — no fuss, no boilerplate.</Description>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <IncludeContentInPack>true</IncludeContentInPack>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Microsoft.Data.SqlClient" />
     </ItemGroup>
