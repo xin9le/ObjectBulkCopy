@@ -189,6 +189,8 @@ internal sealed class SqlBulkCopyDataReader<T> : IDataReader
     /// <inheritdoc/>
     public object GetValue(int i)
     {
+        // todo: Re-implement using source generator for performance
+
         var mapping = TableMapping.Get<T>().ColumnByOrder[i];
         var record = this._dataEnumerator.Current;
         var value = mapping.PropertyInfo.GetValue(record);
