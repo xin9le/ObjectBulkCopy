@@ -1,6 +1,10 @@
 # ObjectBulkCopy
 A super simple C# library for performing [`SqlBulkCopy`](https://learn.microsoft.com/en-us/dotnet/api/microsoft.data.sqlclient.sqlbulkcopy) directly on your CLR objects. No need to manually map properties--just plug in your list of objects and copy them to SQL Server with minimal setup. Ideal for high-performance data inserts in .NET applications.
 
+[![Releases](https://img.shields.io/github/release/xin9le/ObjectBulkCopy.svg)](https://github.com/xin9le/ObjectBulkCopy/releases)
+[![Nuget packages](https://img.shields.io/nuget/v/ObjectBulkCopy.svg)](https://www.nuget.org/packages/ObjectBulkCopy/)
+[![GitHub license](https://img.shields.io/github/license/xin9le/ObjectBulkCopy)](https://github.com/xin9le/ObjectBulkCopy/blob/main/LICENSE)
+
 
 ## Support Platform
 - .NET 8.0+
