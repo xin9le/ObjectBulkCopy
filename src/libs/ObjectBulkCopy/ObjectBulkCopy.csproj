@@ -5,7 +5,7 @@
     <PropertyGroup>
         <PackageId>ObjectBulkCopy</PackageId>
         <Description>A super easy way to bulk copy your CLR objects to SQL Server — no fuss, no boilerplate.</Description>
-        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <IncludeBuildOutput>true</IncludeBuildOutput>
         <IncludeContentInPack>true</IncludeContentInPack>
     </PropertyGroup>
 
