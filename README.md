@@ -37,7 +37,7 @@ using (var connection = new SqlConnection(...))
             new(){ Id = 1, Name = "Takaaki Suzuki" },
         ];
     const SqlBulkCopyOptions options = SqlBulkCopyOptions.Default;
-    const int? timeout = null;
+    int? timeout = null;
     var affectedCount = await connection.BulkInsertAsync(records, options, timeout, cancellationToken);
 }
 ```
