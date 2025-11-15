@@ -6,6 +6,7 @@
     <File Path="NuGet.config" />
   </Folder>
   <Folder Name="/Libs/">
+    <File Path="libs/NuGet.props" />
     <Project Path="libs/ObjectBulkCopy/ObjectBulkCopy.csproj" />
   </Folder>
 </Solution>
