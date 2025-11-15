@@ -114,17 +114,19 @@ internal sealed class TableMapping
 /// </summary>
 internal static class TableMappingExtensions
 {
-    /// <summary>
-    /// Gets the full name of the table.
-    /// </summary>
-    /// <param name="table"></param>
-    /// <returns></returns>
-    public static string GetFullName(this TableMapping table)
+    extension(TableMapping @this)
     {
-        const char begin = '[';
-        const char end = ']';
-        return string.IsNullOrWhiteSpace(table.Schema)
-            ? $"{begin}{table.Name}{end}"
-            : $"{begin}{table.Schema}{end}.{begin}{table.Name}{end}";
+        /// <summary>
+        /// Gets the full name of the table.
+        /// </summary>
+        /// <returns></returns>
+        public string GetFullName()
+        {
+            const char begin = '[';
+            const char end = ']';
+            return string.IsNullOrWhiteSpace(@this.Schema)
+                ? $"{begin}{@this.Name}{end}"
+                : $"{begin}{@this.Schema}{end}.{begin}{@this.Name}{end}";
+        }
     }
 }
