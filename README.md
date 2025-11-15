@@ -9,8 +9,6 @@ A super simple C# library for performing [`SqlBulkCopy`](https://learn.microsoft
 ## Support Platform
 - .NET 8.0+
 
-> [!Note]
-> It is planned to be extended to .NET Standard in the future.
 
 ## How to use
 ```cs
