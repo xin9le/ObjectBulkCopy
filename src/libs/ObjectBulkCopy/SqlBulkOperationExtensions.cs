@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
@@ -67,6 +69,7 @@ public static class SqlBulkOperationExtensions
     /// <returns>A ValueTask representing the asynchronous operation, with the number of rows copied as the result.</returns>
     private static async ValueTask<int> BulkInsertAsyncCore<T>(SqlConnection connection, SqlTransaction? transaction, IEnumerable<T> data, SqlBulkCopyOptions options, int? timeout, CancellationToken cancellationToken)
     {
+        /*
         using (var executor = new SqlBulkCopy(connection, options, transaction))
         {
             var table = TableMapping.Get<T>();
@@ -78,6 +81,69 @@ public static class SqlBulkOperationExtensions
 
             return executor.RowsCopied;
         }
+        */
+
+        using (var executor = new SqlBulkCopy(connection, options, transaction))
+        {
+            var table = TableMapping.Get<T>();
+            executor.BulkCopyTimeout = timeout ?? executor.BulkCopyTimeout;
+            executor.DestinationTableName = table.GetFullName();
+            using (var reader = new SqlBulkCopyDataReader<T>(data))
+            {
+                const ActivityKind kind = ActivityKind.Client;
+                var activityName = $"bulk insert {executor.DestinationTableName}";
+                var parentContext = Activity.Current?.Context ?? default;
+                using var activity = ActivitySourceCache.Instance.StartActivity(activityName, kind, parentContext);
+                try
+                {
+                    var serverName = getServerName(connection);
+                    activity?.SetTag("db.system.name", "microsoft.sql_server");
+                    activity?.SetTag("db.query.summary", activityName);
+                    activity?.SetTag("db.namespace", $"{serverName} | {connection.Database}");
+                    activity?.SetTag("db.operation.timeout", executor.BulkCopyTimeout);
+
+                    await executor.WriteToServerAsync(reader, cancellationToken).ConfigureAwait(false);
+
+                    activity?.SetTag("db.response.returned_rows", executor.RowsCopied);
+                }
+#if NET9_0_OR_GREATER
+                catch (Exception ex)
+                {
+                    activity?.SetStatus(ActivityStatusCode.Error);
+                    activity?.AddException(ex);
+                    throw;
+                }
+#else
+                catch
+                {
+                    activity?.SetStatus(ActivityStatusCode.Error);
+                    throw;
+                }
+#endif
+            }
+            return executor.RowsCopied;
+        }
+
+
+        #region Local Functions
+        static ReadOnlySpan<char> getServerName(SqlConnection connection)
+        {
+            // tcp:<ResourceName>.database.windows.net,1433
+
+            var dataSource = connection.DataSource.AsSpan();
+            var from = dataSource.IndexOf(':');
+            var to = dataSource.LastIndexOf(',');
+
+            from = (from < 0) ? 0 : (from + 1);
+            to = (to < 0) ? dataSource.Length : to;
+
+            if (from >= to)
+                return dataSource;
+
+            var length = to - from;
+            return dataSource.Slice(from, length);
+        }
+        #endregion
     }
     #endregion
 }
