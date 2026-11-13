@@ -1,10 +1,4 @@
 <Solution>
-  <Folder Name="/Assets/">
-    <File Path=".editorconfig" />
-    <File Path="Directory.Build.props" />
-    <File Path="Directory.Packages.props" />
-    <File Path="NuGet.config" />
-  </Folder>
   <Folder Name="/Libs/">
     <File Path="libs/NuGet.props" />
     <Project Path="libs/ObjectBulkCopy/ObjectBulkCopy.csproj" />
