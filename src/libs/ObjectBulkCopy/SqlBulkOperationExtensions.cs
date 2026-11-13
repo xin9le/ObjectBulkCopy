@@ -106,20 +106,12 @@ public static class SqlBulkOperationExtensions
 
                     activity?.SetTag("db.response.returned_rows", executor.RowsCopied);
                 }
-#if NET9_0_OR_GREATER
                 catch (Exception ex)
                 {
                     activity?.SetStatus(ActivityStatusCode.Error);
                     activity?.AddException(ex);
                     throw;
                 }
-#else
-                catch
-                {
-                    activity?.SetStatus(ActivityStatusCode.Error);
-                    throw;
-                }
-#endif
             }
             return executor.RowsCopied;
         }
